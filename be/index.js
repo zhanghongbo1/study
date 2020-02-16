@@ -4,6 +4,7 @@ const app = express()
 var bodyParser = require('body-parser')
 const message = require('./router/index')
 
+const backto =require('./router/back')
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -17,7 +18,8 @@ app.all('*', function (req, res, next) {
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
   });
-app.use('/',message)  
+app.use('/',message) 
+app.use('/',backto)
 const connect= require ( './mongose/index')
 
 connect()

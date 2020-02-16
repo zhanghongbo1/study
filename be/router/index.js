@@ -1,5 +1,5 @@
 const express = require ( 'express')
-const list =require('../face/index')
+
 const router=express.Router()
 const { messageAdd,mes} = require('../mongose/Schema/message')
 
@@ -15,14 +15,25 @@ router.post('/message',(req,res,next)=>{
      })
     
 })
-
+router.post('/new',(req,res,next)=>{
+    mes.find({},(err,doc)=>{
+       // console.log(doc)
+       res.json({
+        code:200,
+        data:doc.reverse().slice(0,5),
+        //total:doc.length
+    })
+    })
+    
+})
 
 router.post('/getmes',(req,res,next)=>{
     mes.find({},(err,doc)=>{
        // console.log(doc)
        res.json({
         code:200,
-        data:doc.reverse()
+        data:doc.reverse().slice(0,10),
+        total:doc.length
     })
     })
     
