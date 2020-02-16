@@ -47,7 +47,17 @@ router.post('/back',(req,res,next)=>{
  
 
 })
-
+router.post('/page',(req,res,next)=>{
+   // console.log(req.body.page)
+    mes.find({},(err,doc)=>{
+     
+        res.json({
+            code:200,
+            data:doc.reverse().slice((req.body.page-1)*10,(req.body.page-1)*10+10)
+        }
+        )
+    })
+})
 module.exports =router
 
 

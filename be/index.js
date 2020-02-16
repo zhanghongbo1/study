@@ -3,7 +3,7 @@ const path = require ( 'path')
 const app = express()
 var bodyParser = require('body-parser')
 const message = require('./router/index')
-
+const img = require('./router/img')
 const backto =require('./router/back')
 
 app.use(bodyParser.json());
@@ -20,6 +20,7 @@ app.all('*', function (req, res, next) {
   });
 app.use('/',message) 
 app.use('/',backto)
+app.use('/',img)
 const connect= require ( './mongose/index')
 
 connect()
