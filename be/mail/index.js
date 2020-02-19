@@ -37,5 +37,5 @@ transporter.sendMail(mailOptions, (error, info) => {
 })
   return str
 };
-send('li1349142@163.com')
+
 module.exports = { send }
