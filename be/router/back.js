@@ -58,6 +58,9 @@ router.post('/page',(req,res,next)=>{
         )
     })
 })
+router.get("haha",(req,res)=>{
+    res.send("哈哈")
+})
 module.exports =router
 
 

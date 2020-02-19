@@ -5,7 +5,8 @@ var bodyParser = require('body-parser')
 const message = require('./router/index')
 const img = require('./router/img')
 const backto =require('./router/back')
-
+const {user , userAdd}= require('./mongose/Schema/user')
+const mail=require('./router/mail')
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -21,6 +22,7 @@ app.all('*', function (req, res, next) {
 app.use('/',message) 
 app.use('/',backto)
 app.use('/',img)
+app.use('/',mail)
 const connect= require ( './mongose/index')
 
 connect()

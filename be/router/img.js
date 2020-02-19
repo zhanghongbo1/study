@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
     cb(null,  path.join( __dirname, '../public/img') )
   },
   filename: function (req, file, cb) {
-    console.log('file',file.originalname.split('.')[1])
+  //  console.log('file',file.originalname.split('.')[1])
     const filename = file.originalname.split('.')[0] + '-' +Date.now() + '.' + file.originalname.split('.')[1]
     req.filename = filename 
     cb(null, filename)
@@ -24,8 +24,8 @@ var upload = multer({ storage: storage })
 
 
 router.post('/img',upload.any(),(req,res)=>{
-    console.log(req.body) 
-    console.log(req.filename)
+   // console.log(req.body) 
+   // console.log(req.filename)
     res.json({
         status: 2,
         info: '图片上传成功',
