@@ -42,7 +42,7 @@ router.post('/getmes',(req,res,next)=>{
 router.post('/num',(req,res,next)=>{
 const id=req.body
     mes.update(id,{$inc:{num:1}},(err,doc)=>{
-        //console.log(id)
+       console.log(id)
         res.json({
             code:200,
             mes:"成功"

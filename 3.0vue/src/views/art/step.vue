@@ -25,7 +25,10 @@
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
+.block{
+  margin-top: 10px;
+}
 .el-timeline {
   padding: 0;
   margin-top: 20px;

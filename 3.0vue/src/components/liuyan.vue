@@ -102,13 +102,13 @@ export default {
 <style lang="scss">
 .bord {
   //   min-height: 600px;
-  width: 995px;
+  width: 100%;
   margin-bottom: 10px;
   .text {
     border-radius: 6px;
     border: 1px solid #ccc;
     padding: 2px;
-    width: 995px;
+    width: 100%;
     background: white;
     .pic {
       height: 50px;
@@ -116,7 +116,7 @@ export default {
       border-top: 2px solid #999;
       display: flex;
       align-items: center;
-      padding-left: 14px;
+      width: 100%;
       position: relative;
       .lab{
         display: flex;
@@ -151,7 +151,7 @@ export default {
     border: none;
     resize: unset;
     font-size: 20px;
-    width: 767px;
+    width: 1500px;
   }
   .psimg{
     position: relative;

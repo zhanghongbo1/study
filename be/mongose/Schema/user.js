@@ -3,6 +3,10 @@ const mail = new mongoose.Schema({
     usename:String,
     password:String,
     mail:String,
+    img:{
+        type:String,
+        default:"https://i.loli.net/2020/02/21/hCcgSEfNOlwtZ7V.jpg"
+    }
 })
 
 const  user=mongoose.model('User',mail)

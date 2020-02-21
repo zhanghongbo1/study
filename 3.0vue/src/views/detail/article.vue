@@ -58,7 +58,7 @@ export default {};
     .include {
       padding: 0 20px;
       .text {
-          font-size: 20px;
+        font-size: 20px;
         overflow: hidden; //隐藏多余行数
         text-overflow: ellipsis;
         display: -webkit-box;

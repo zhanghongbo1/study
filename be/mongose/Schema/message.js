@@ -6,6 +6,7 @@ const message = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    user:String,
     num:{
         type:Number,
         default:1
@@ -17,6 +18,10 @@ const message = new mongoose.Schema({
     falg:{
         type:Boolean,
         default:false
+    },
+    img:{
+        type:String,
+        default:"https://i.loli.net/2020/02/21/hCcgSEfNOlwtZ7V.jpg"
     }
 })
 const mes = mongoose.model('Mes', message)
@@ -37,7 +42,7 @@ const messageAdd = (item) => {
       str= item.info.replace(p1,`<img src=https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif />`)
    }
     if(item!=""){
-        const arr = new mes(str==""?item:{info:str})
+        const arr = new mes(str==""?item:{info:str,user:item.user})
         arr.save((err) => {
             if (err) {
                 console.log(err)

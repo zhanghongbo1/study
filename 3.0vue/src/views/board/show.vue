@@ -6,10 +6,10 @@
     </div>
 
     <div class="content clearfix">
-      <div class="details" v-for="(item,index) in arr" :key="item._id">
-        <img src="@/assets/img/head.png" alt="头像" title="头像" />
+      <div class="details" v-for="item in arr" :key="item._id">
+        <img :src="item.img" alt="头像" title="头像" />
         <div>
-          <p class="name">网友***{{index}}</p>
+          <p class="name">{{item.user}}</p>
           <p class="text" v-html="item.info "></p>
           <p class="all">
             <span>{{item.updateTime.split('T')[0]+" "+item.updateTime.split('T')[1].slice(0,8)}}</span>
@@ -33,15 +33,18 @@
             <span>{{item.num}}</span>
           </p>
           <el-button type="primary" @click="back(item)">回复({{item.arr.length}})</el-button>
-
+          <!-- //弹窗 -->
           <el-dialog
             title="回复"
             :visible.sync="dialogVisible"
             width="30%"
             :before-close="handleClose"
           >
+            <!-- 留言 -->
             <liuyan @textto="sendmes"></liuyan>
+            <!-- 留言 -->
           </el-dialog>
+          <!-- 弹窗 -->
         </div>
         <div
           class="showback"
@@ -49,20 +52,26 @@
           :key="i"
           v-show="item.falg&&item.arr.length>0"
         >
-          <img src="@/assets/img/head.png" alt />
+          <img :src="val.img" alt />
           <div class>
             <p>
-              <span>a</span>回复
-              <span>b</span>
+              <span style="color: red">{{val.from}}</span>回复
+              <span style="color: red">{{val.to}}</span>
             </p>
             <p class="imgback" v-html="val.back"></p>
           </div>
           <p class="mid">
-            <el-button type="primary" @click="send(item)">回复</el-button>
+            <el-button type="primary" @click="send(val)">回复</el-button>
           </p>
         </div>
       </div>
-      <el-pagination @current-change="changepage" :current-page.sync='page' background  layout= " prev, pager, next, jumper" :total="total"></el-pagination>
+      <el-pagination
+        @current-change="changepage"
+        :current-page.sync="page"
+        background
+        layout=" prev, pager, next, jumper"
+        :total="total"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -81,8 +90,9 @@ export default {
       dialogVisible: false,
       //falg:false,
       mes: {},
-      page:1
-     
+      page: 1,
+      to: "",
+      
     };
   },
   computed: {
@@ -94,50 +104,70 @@ export default {
 
   mounted() {
     this.$store.dispatch("show/getmes");
-   // console.log(this.$store.state.show);
-
-    
+    // console.log(this.$store.state.show);
+    if (Cookies.get("user")) {
+       this.$axios.post('/startimg',{user:Cookies.get("user")}).then(res=>{
+       
+       })
+    }
   },
   methods: {
+    //点赞
     addnum(id) {
       if (Cookies.get("flag")) {
-        return;
+        let arr = JSON.parse(Cookies.get("flag"));
+        if (arr.indexOf(id) == -1) {
+          this.$store.dispatch("show/numadd", id);
+          arr.push(id);
+          Cookies.set("flag", arr, { expires: 1 });
+        }
       } else {
-        Cookies.set("flag", 10, { expires: 1 });
+        Cookies.set("flag", [id], { expires: 1 });
         this.$store.dispatch("show/numadd", id);
       }
     },
+    //点击回复里面的回复
     send(item) {
-      this.mes = item;
+      // console.log(item)
+      this.to = item.from;
+      
+      // console.log(item)
       this.dialogVisible = true;
     },
     handleClose(done) {
       this.dialogVisible = false;
     },
     back(item) {
+      //点击外面的回复
+      //console.log(item)
       item.arr.length > 0
         ? (item.falg = !item.falg)
         : (this.dialogVisible = true);
       this.mes = item;
+      
     },
+    //提交
     sendmes(val) {
       this.dialogVisible = false;
       this.$axios
         .post("/back", {
+          to: this.to,
+          from: Cookies.get("user"),
           mes: this.mes,
-          val: val
+          val: val,
+        
+
         })
         .then(res => {
           if ((res.code = 200)) {
             this.$store.dispatch("show/getmes");
           }
         });
-    }
-    ,
-    changepage(item){
+    },
+    changepage(item) {
       //console.log(item)
-      Cookies.set('page',item,{ expires: 1 })
-      this.$store.dispatch('show/page',item)
+      Cookies.set("page", item, { expires: 1 });
+      this.$store.dispatch("show/page", item);
     }
   }
 };
@@ -149,6 +179,8 @@ export default {
   background: white;
   border-radius: 4px;
   padding-top: 2px;
+  width: 1605px;
+
   .tell {
     background: #ccc;
     border-radius: 4px;
@@ -173,7 +205,6 @@ export default {
     color: red;
   }
   p {
-    margin: 10px 0;
     svg {
       width: 14px;
       height: 14px;
@@ -181,7 +212,7 @@ export default {
       cursor: pointer;
     }
   }
- 
+
   .details {
     display: flex;
     align-items: center;
@@ -218,11 +249,11 @@ export default {
       }
     }
   }
-  .details:nth-of-type(10){
-   // background: red!important;
+  .details:nth-of-type(10) {
+    // background: red!important;
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
-  };
+  }
   .all {
     display: flex;
     align-items: center;
@@ -238,7 +269,7 @@ export default {
     pointer-events: none;
   }
   .bord .text {
-    width: 550px;
+    width: 750px;
   }
   .bord textarea {
     width: 484px;
@@ -255,13 +286,13 @@ export default {
     margin-top: 20px;
     float: right;
   }
-  .clearfix:after{/*伪元素是行内元素 正常浏览器清除浮动方法*/
-        content: "";
-        display: block;
-        height: 0;
-        clear:both;
-        visibility: hidden;
-    }
-
+  .clearfix:after {
+    /*伪元素是行内元素 正常浏览器清除浮动方法*/
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
 }
 </style>

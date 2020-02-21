@@ -3,11 +3,11 @@
     <div class="tome">
       <div class="top">
         <el-button type="primary">关于博主</el-button>
-        <el-button type="primary" style="width:97.98px">留言板</el-button>
+        <el-button type="primary" style="width:97.98px" @click="tobord">留言板</el-button>
       </div>
       <div class="go">
-        <el-button type="primary">个人学习</el-button>
-        <el-button type="primary">一起学习</el-button>
+        <el-button type="primary" @click="tomine">个人学习</el-button>
+        <el-button type="primary" @click="toart">一起学习</el-button>
       </div>
     </div>
     <div class="aboutme">
@@ -27,7 +27,7 @@
       <p>
           <span>加入群聊：</span>
           <span>
-              <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e5eb155c5d8b6fbd0cfedd5d265d9f3f30b577d1c3987b25607f9bea2ec32ea8"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="前端交流" title="前端交流"></a>
+             <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=69fd1a3b58ba0da579acef41d2838dcfffddb697b5136a05f8e0a36eb2bfada9"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="前端交流群" title="前端交流群"></a>
           </span>
       </p>
       <p>
@@ -41,14 +41,28 @@
       <p>
         <span>打赏博客:</span>
         <span>
-          <img  style="width:100px;height:100px;margin-left:5px" src="@/assets/img/pay.png" alt="打赏二维码" title="打赏二维码">
+          <img  style="width:100px;height:100px;margin-left:1px" src="@/assets/img/pay.png" alt="打赏二维码" title="打赏二维码">
         </span>
       </p>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+
+  methods: {
+    tobord(){
+        this.$router.push({name:"board"})
+    },
+    tomine(){
+      this.$router.push({name:"mine"})
+    },
+    toart(){
+this.$router.push({name:"art"})
+    }
+  },
+  
+};
 </script>
 
 

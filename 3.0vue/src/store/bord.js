@@ -43,8 +43,10 @@ export const show = {
         //提交数据
          getMessage({commit},val){
           myaxios.post("/message", {
-                  info: val['val']
+                  info: val['val'],
+                  user:val.user
                 }).then(res=>{
+                    
                     if(res.code=200){
                         val['this'].$message( {message: '提交成功',
                         type: 'success'})
@@ -56,6 +58,7 @@ export const show = {
         //获取全部数据
         getmes({commit}){
              myaxios.post('/getmes').then(res=>{
+                 //console.log(res)
               commit('mes',{data:res.data,total:res.total})
             
     })
@@ -64,6 +67,7 @@ export const show = {
         numadd({dispatch},val){
             //console.log(re)
             myaxios.post('/num',{_id:val}).then(res=>{
+                
                 if(res.code==200){
                    dispatch('getmes')
                 }
@@ -81,7 +85,7 @@ export const show = {
         },
         //获取图片
         upload({commit},val){
-            console.log(1)
+            //console.log(1)
             myaxios.post('/img',val).then(res=>{
                 console.log(res)
                 if(res.status=2){

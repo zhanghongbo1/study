@@ -36,9 +36,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
     .tails{
         margin-top: 10px;
+    }
+    .el-collapse-item__arrow{
+      margin: 0
     }
     
 </style>

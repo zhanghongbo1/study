@@ -41,18 +41,27 @@ export default {
     ...mapState({img:state=>state.show.imgSrc})
   },
   methods: {
+    //第一次提交
      get(val) {
        if(!val){
          alert("请输入留言内容")
        }else{
-         this.$store.dispatch('show/getMessage',{"val":val,'this':this})
-          if(Cookies.get('page')!="1"){
+         console.log(Cookies.get("user"))
+         if(Cookies.get("user")){
+             this.$store.dispatch('show/getMessage',{"val":val,'this':this,user:Cookies.get("user")})
+          if(Cookies.get('page')!="1"&&Cookies.get('page')){
               this.$store.dispatch('show/page',Cookies.get('page'))
           }else{
+         
              this.$store.dispatch('show/getmes')
           }
         
          this.$store.commit("show/changefalse")
+         }else{
+           this.$message({message:"登录后回复",type:"error"})
+         }
+        
+      
        }   
     },
     upload(item){
@@ -66,7 +75,7 @@ export default {
   display: flex;
   margin-top: 20px;
   .left {
-    width: 1000px;
+    width: 1600px;
     margin-right: 14px;
   }
   .right {

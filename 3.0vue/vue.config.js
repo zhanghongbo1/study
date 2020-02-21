@@ -24,7 +24,22 @@ module.exports={
             'axios':'axios',
             'element-ui': 'ElEMENT',
         }
-      }
-    
+      },
+      css: {
+        loaderOptions: {
+            css: {
+                // options here will be passed to css-loader
+            },
+            postcss: {
+                // options here will be passed to postcss-loader
+                plugins: [require('postcss-pxtorem')({
+                   rootValue:200,
+                   selectorBlackList:[],
+                   propList:['*']
+                })]
+            }
+        }
+    }
+
 
 }

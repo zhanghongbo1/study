@@ -2,15 +2,19 @@ html {
     overflow-x:auto;
     overflow-y:scroll;
     }
-    body, dl, dt, dd, ul, ol, li, pre, form, fieldset, input, p, blockquote, th, td {
+    p{
+     padding: 10px 0;
+     margin: 0;
+    }
+    body, dl, dt, dd, ul, ol, li, pre, form, fieldset, input,  blockquote, th, td {
     font-weight:400;
     margin:0;
     padding:0;
     }
-    h1, h2, h3, h4, h4, h5 {
+    /* h1, h2, h3, h4, h4, h5 {
     margin:0;
     padding:0;
-    }
+    } */
     body {
     background-color:#FFFFFF;
     color:#666666;
@@ -66,3 +70,9 @@ html {
     q:before, q:after, blockquote:before, blockquote:after {
     content:””;
     }
+    .el-carousel__indicators{
+        display: none;
+      }
+      .el-breadcrumb{
+        font-size: 24px;
+      }

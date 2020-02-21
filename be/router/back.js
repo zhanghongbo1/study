@@ -2,14 +2,10 @@ const express = require ( 'express')
 const list = require ('../face')
 const router=express.Router()
 let { mes }=require ('../mongose/Schema/message')
-
+let { user } =require ('../mongose/Schema/user')
 router.post('/back',(req,res,next)=>{
-   // console.log(mes.arr)
    const p1= /\[[\u4e00-\u9fa5]+\]/g
-   const p2=/\[[\u4e00-\u9fa5]+\]/
    const content= req.body.val.match(p1)
-//    console.log(req.body.val,"req.body")
-//    console.log(content,'content')
    let str=''
    if(content){
        for ( var i=0;i<content.length;i++){
@@ -20,35 +16,42 @@ router.post('/back',(req,res,next)=>{
             }
        }
       str= req.body.val.replace(p1,`<img src=https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif />`)
-      req.body.mes.arr.push({back:str})
-         mes.findByIdAndUpdate(req.body.mes._id,{arr:req.body.mes.arr},(err)=>{
-       if(err){
-           console.log("保存失败")
-       }else{
-           res.json({
-               code:200,
-               mes:"保存成功"
-           })
-       }
-   })
+      user.findOne({usename:req.body.from}).then(result=>{
+        req.body.mes.arr.push({back:str,to:req.body.mes.user,from:req.body.from,img:result.img})
+        mes.findByIdAndUpdate(req.body.mes._id,{arr:req.body.mes.arr},(err)=>{
+            if(err){
+                console.log("保存失败")
+            }else{
+                res.json({
+                    code:200,
+                    mes:"保存成功"
+                })
+            }
+        })
+      })
+     
+ 
    }else{
-    req.body.mes.arr.push({back:req.body.val})
-    mes.findByIdAndUpdate(req.body.mes._id,{arr:req.body.mes.arr},(err)=>{
-        if(err){
-            console.log("保存失败")
-        }else{
-            res.json({
-                code:200,
-                mes:"保存成功"
-            })
-        }
+    user.findOne({usename:req.body.from}).then(result=>{
+        req.body.mes.arr.push({back:req.body.val,to:req.body.to?req.body.to:req.body.mes.user,from:req.body.from,img:result.img})
+        mes.findByIdAndUpdate(req.body.mes._id,{arr:req.body.mes.arr},(err)=>{
+            if(err){
+                console.log("保存失败")
+            }else{
+                res.json({
+                    code:200,
+                    mes:"保存成功"
+                })
+            }
+        })
     })
+  
    }
  
 
 })
 router.post('/page',(req,res,next)=>{
-   // console.log(req.body.page)
+
     mes.find({},(err,doc)=>{
      
         res.json({
@@ -58,9 +61,25 @@ router.post('/page',(req,res,next)=>{
         )
     })
 })
-router.get("haha",(req,res)=>{
-    res.send("哈哈")
+
+router.post('/startimg',(req,res)=>{
+        user.findOne({usename:req.body.user}).then(result=>{
+       //     console.log(result.img)
+            mes.updateOne({user:req.body.user},{img:result.img},(err,doc)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    
+                    mes.find({},(err,doc)=>{
+                        // console.log(doc)
+                    })
+                }
+            })
+        })
+      
 })
+
+
 module.exports =router
 
 

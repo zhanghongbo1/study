@@ -1,8 +1,8 @@
 <template>
   <div class="layout">
     <el-container>
-      <el-header style="height:100px;position:relative"><top/></el-header>
-      <el-main style="background:grey;height:100%">
+      <el-header style="height:100px;position:relative;display: flex;"><top/></el-header>
+      <el-main style="background:grey;height:100%;overflow-x:hidden">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -23,7 +23,7 @@ export default {
 <style lang="scss" scoped>
 .layout{
     padding: 0 200px;
-    zoom: 0.75;
+     zoom: 0.75;
 }
     
 </style>

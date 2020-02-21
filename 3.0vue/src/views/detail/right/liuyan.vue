@@ -4,20 +4,13 @@
         <div class="sketch" v-for="item in list" :key='item._id'>
             <img src="@/assets/img/head.png" alt="">
             <div>
-                <div style="color:red;font-size:20px;font-weight:800">用户名字</div>
+                <div style="color:red;font-size:20px;font-weight:800">{{item.user?item.user:"网友123"}}</div>
                 <p v-html="item.info"></p>
                 <p>{{item.updateTime.split('T')[0]}}</p>
             </div>
         </div>
 
-        <!-- <div class="sketch">
-            <img src="@/assets/img/head.png" alt="">
-            <div>
-                <div style="color:red;font-size:20px;font-weight:800">用户名字</div>
-                <p>简述内容</p>
-                <p>time</p>
-            </div>
-        </div> -->
+       
     </div>
 </template>
 
