@@ -43,10 +43,8 @@ router.post('/check',(req,res)=>{
 
 //登录
 
-//password: '123324354',
 router.post('/login',(req,res)=>{
     user.findOne({mail:req.body.mail}).then((result)=>{
-    //  console.log(result)
         if(result&&req.body.password==result.password){
             res.json({
                 data:200,
@@ -63,6 +61,32 @@ router.post('/login',(req,res)=>{
    
 })
 
+//QQ登录
+
+//usename:String,
+// password:String,
+// mail:String,
+// img:{
+//     type:String,
+//     default:"https://i.loli.net/2020/02/21/hCcgSEfNOlwtZ7V.jpg"
+// }
+router.post('/qq',(req,res)=>{
+ 
+    user.find({usename:req.body.usename}).then(res=>{
+        if(res.length<1){
+        const arr=new user({usename:req.body.usename,img:req.body.img})
+       arr.save(err=>{
+        if(err){
+            console.log(arr)
+        }else{
+            console.log("保存成功")
+        }
+    })
+        }
+    })
+ 
+  
+})
 
 
 

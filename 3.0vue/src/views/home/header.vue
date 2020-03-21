@@ -1,11 +1,13 @@
 <template>
   <div class="headr">
+    <div class="bg">
     <img src="@/assets/img/header.png" alt />
+    </div>
     <el-button type="primary" v-for="item in tab" :key="item.id" @click="pathto(item)">{{item.name}}</el-button>
     <div class="login" @mouseleave="out()">
       <label for="img">
         <input type="file" id='img' style="display:none" @input="changeimg">
-      <img :src="src" alt v-show="isLogin" @mouseenter="enter()" />
+      <img :src="this.$store.state.src" alt v-show="isLogin" @mouseenter="enter()" />
       </label>
       <div class="exit" v-show="exitover" @click="outlogin">退出</div>
       <el-button type="primary" style="margin-right:5px" @click="show" v-show="!isLogin">注册</el-button>
@@ -95,10 +97,7 @@ export default {
     getimg(){
       if(Cookies.get("user")){
         const user=Cookies.get("user")
-         axios.post('/getimg',{id:user}).then(res=>{
-            this.src=res.data.img
-           
-         })
+            this.$store.dispatch("imgget",user)
       }
      
     }
@@ -109,6 +108,9 @@ export default {
   mounted() {
     this.checkLogin();
     this.getimg()
+   
+      
+  
   }
 };
 </script>
@@ -118,9 +120,12 @@ export default {
 .headr {
   display: flex;
   align-items: center;
-
+  width: 100%;
+  .bg{background-color: #409EFF;}
   img {
     width: 540px;
+    height: 100px;
+    
   }
   .el-button--primary {
     margin: 0 40px;

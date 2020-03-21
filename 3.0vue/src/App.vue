@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    
+    <partJs/>
      <router-view/>
   </div>
 </template>
 
 
-
+<script>
+import partJs from '@/components/particles.vue'
+export default {
+  components:{
+    partJs
+  }
+}
+</script>
 <style>
 #app {
   

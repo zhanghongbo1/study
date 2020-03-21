@@ -2,7 +2,7 @@
   <div class="layout">
     <el-container>
       <el-header style="height:100px;position:relative;display: flex;"><top/></el-header>
-      <el-main style="background:grey;height:100%;overflow-x:hidden">
+      <el-main style="height:100%;overflow-x:hidden">
         <router-view></router-view>
       </el-main>
     </el-container>

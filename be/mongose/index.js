@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const databaseName = 'boke30'
+const databaseName = 'boke32'
 
 const url = `mongodb://127.0.0.1:27017/${ databaseName }`
 

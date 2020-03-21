@@ -4,13 +4,17 @@ import router from './router'
 import store from './store'
  import '@/assets/api/rem.js'
 import '@/assets/reset.css'
+
 import myaixos from '@/assets/request'
+
 import '@/assets/font/iconfont.css'
 Vue.config.productionTip = false
 Vue.prototype.$axios=myaixos 
 import SlideVerify from 'vue-monoplasty-slide-verify';
 
 Vue.use(SlideVerify);
+
+
 // Vue.filter('change',(val)=>{
 //   const reg = /\[(.+?)\]/g
 //   console.log(val)

@@ -105,11 +105,11 @@ export default {
   mounted() {
     this.$store.dispatch("show/getmes");
     // console.log(this.$store.state.show);
-    if (Cookies.get("user")) {
-       this.$axios.post('/startimg',{user:Cookies.get("user")}).then(res=>{
+    // if (Cookies.get("user")) {
+    //    this.$axios.post('/startimg',{user:Cookies.get("user")}).then(res=>{
        
-       })
-    }
+    //    })
+    // }
   },
   methods: {
     //点赞
@@ -129,10 +129,13 @@ export default {
     //点击回复里面的回复
     send(item) {
       // console.log(item)
-      this.to = item.from;
-      
-      // console.log(item)
+      if(Cookies.get('user')){
+          this.to = item.from;
       this.dialogVisible = true;
+      }else{
+          this.$message("登录后回复")
+      }
+    
     },
     handleClose(done) {
       this.dialogVisible = false;
@@ -140,10 +143,15 @@ export default {
     back(item) {
       //点击外面的回复
       //console.log(item)
-      item.arr.length > 0
+      if(Cookies.get('user')){
+          item.arr.length > 0
         ? (item.falg = !item.falg)
         : (this.dialogVisible = true);
       this.mes = item;
+      }else{
+        this.$message("登录后回复")
+      }
+      
       
     },
     //提交

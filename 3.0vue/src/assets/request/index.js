@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API;
+// console.log(axios.defaults.baseURL)
 // console.log(process.env.VUE_APP_BASE_API)
  function get(url, params){    
     return new Promise((resolve, reject) =>{        

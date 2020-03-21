@@ -14,6 +14,11 @@
 
     <div class="register">
      <el-button type="primary" @click="set">登录</el-button>
+     
+    </div>
+      <div class="fast">
+        <span>快捷登录</span>
+        <img src="@/assets/img/QQ.png" alt="" @click="useqqlogin" >
     </div>
    
   </div>
@@ -46,7 +51,16 @@ export default {
              })
            }
       })
-    }
+    },
+    useqqlogin(){
+       QC.Login.showPopup(
+         { appId:"101855062",
+         redirectURI:"http://www.zhanghongbo.top/platform"
+         } 
+          )
+         //http://127.0.0.1:8080/platform/#/board
+         Cookies.set("re",1)
+    },
   
     
   }
@@ -107,12 +121,15 @@ export default {
   }
   .fast{
       margin-top: 30px;
+      display: flex;
+      align-items: center;
       span{
           font-size: 20px;
           font-weight: 700;
       }
       img{
         width: 150px;
+        margin-left: 40px;
       }
   }
 }

@@ -21,8 +21,7 @@
     </div>
     <div class="fast">
         <span>快捷注册</span>
-        <img src="@/assets/img/QQ.png" alt="" >
-        
+        <img src="@/assets/img/QQ.png" alt="" @click="useqqlogin" >
     </div>
   </div>
 </template> 
@@ -136,6 +135,14 @@ export default {
        }
     
     },
+    useqqlogin(){
+       QC.Login.showPopup(
+         { appId:"101849705",
+         redirectURI:"http://127.0.0.1:8080/platform/board"}  )
+      Cookies.set("re",1)
+    },
+
+    
     
   }
 };
@@ -192,12 +199,15 @@ export default {
   }
   .fast{
       margin-top: 30px;
+      display: flex;
+      align-items: center;
       span{
           font-size: 20px;
           font-weight: 700;
       }
       img{
         width: 150px;
+        margin-left: 40px;
       }
   }
 }

@@ -30,13 +30,13 @@ router.post('/img',upload.any(),(req,res)=>{
     res.json({
         status: 2,
         info: '图片上传成功',
-        imgUrl: `http://localhost:3000/img/${ req.filename }`
+        imgUrl: `http://www.zhanghongbo.top/img/${ req.filename }`
       })
 })
 //x修改头像
 router.post('/changeimg',upload.any(),(req,res)=>{
     //  console.log(req.body.id)
-     user.updateOne({usename:req.body.id},{img:`http://localhost:3000/img/${ req.filename }`},(err,doc)=>{
+     user.updateOne({usename:req.body.id},{img:`http://www.zhanghongbo.top/img/${ req.filename }`},(err,doc)=>{
        if(err){
          console.log(err)
        }else{
@@ -47,7 +47,7 @@ router.post('/changeimg',upload.any(),(req,res)=>{
        }
      })
     // mes.findOne({user:req.body.id}).then(res=>{console.log(res)})
-     mes.updateMany({user:req.body.id.toString()},{img:`http://localhost:3000/img/${ req.filename }`},(err,doc)=>{
+     mes.updateMany({user:req.body.id.toString()},{img:`http://www.zhanghongbo.top/img/${ req.filename }`},(err,doc)=>{
        if(err){
          console.log(err)
        }else{
@@ -57,7 +57,7 @@ router.post('/changeimg',upload.any(),(req,res)=>{
 })
 router.post('/getimg',(req,res)=>{
   user.findOne({usename:req.body.id}).then(val=>{
-  //  console.log(val)
+  // console.log(val)
      res.send({
        code:200,
        img:val.img
