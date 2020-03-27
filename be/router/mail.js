@@ -3,6 +3,7 @@ const express = require('express')
 
 const router = express.Router()
 const  {user} = require ('../mongose/Schema/user')
+const { mes } =require('../mongose/Schema/message')
 
 let str=""
 router.post('/mail',(req,res)=>{
@@ -58,7 +59,7 @@ router.post('/login',(req,res)=>{
             })
         }
 })
-   
+
 })
 
 //QQ登录
@@ -73,7 +74,7 @@ router.post('/login',(req,res)=>{
 router.post('/qq',(req,res)=>{
  
     user.find({usename:req.body.usename}).then(res=>{
-        if(res.length<1){
+        if(res.length<1&&req.body.usename!=""){
         const arr=new user({usename:req.body.usename,img:req.body.img})
        arr.save(err=>{
         if(err){
@@ -83,7 +84,11 @@ router.post('/qq',(req,res)=>{
         }
     })
         }
+
+    
     })
+  
+   
  
   
 })

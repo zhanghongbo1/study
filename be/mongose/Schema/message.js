@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const list =require('../../face')
+const { user } =require ('./user')
 const message = new mongoose.Schema({
     info: String,
     updateTime: {
@@ -42,14 +43,18 @@ const messageAdd = (item) => {
       str= item.info.replace(p1,`<img src=https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/${index}.gif />`)
    }
     if(item!=""){
-        const arr = new mes(str==""?item:{info:str,user:item.user})
-        arr.save((err) => {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log('数据保存成功')
-            }
+        user.findOne({usename:item.user},(err,doc)=>{
+            console.log(item)
+            const arr = new mes(str==""?{...item,img:doc.img}:{info:str,user:item.user,img:doc.img})
+            arr.save((err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log('数据保存成功')
+                }
+            })
         })
+    
     return    mes.find({},(err,doc)=>{
              return doc
           })

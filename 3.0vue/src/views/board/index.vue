@@ -70,7 +70,7 @@ export default {
     }
   },
   mounted() {
-    let that = this;
+        let that = this;
     if (QC.Login.check()) {
       QC.Login(
         {

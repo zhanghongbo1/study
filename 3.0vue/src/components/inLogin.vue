@@ -55,7 +55,7 @@ export default {
     useqqlogin(){
        QC.Login.showPopup(
          { appId:"101855062",
-         redirectURI:"http://www.zhanghongbo.top/platform"
+         redirectURI:"http://www.zhanghongbo.top/platform/#/board"
          } 
           )
          //http://127.0.0.1:8080/platform/#/board

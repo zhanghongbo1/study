@@ -14,7 +14,7 @@ import top from "./header";
 export default {
   components: { top },
   mounted() {
-    // console.log(this.$route)
+
   }
 };
 </script>

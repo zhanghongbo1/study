@@ -138,7 +138,7 @@ export default {
     useqqlogin(){
        QC.Login.showPopup(
          { appId:"101849705",
-         redirectURI:"http://127.0.0.1:8080/platform/board"}  )
+         redirectURI:"http://127.0.0.1:8080/platform/#/board"}  )
       Cookies.set("re",1)
     },
 
