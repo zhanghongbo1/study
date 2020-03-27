@@ -1,48 +1,38 @@
 <template>
   <div>
-    <div class="article">
-      <h3>如何建立博客</h3>
+    <div class="article" v-for="item in arr" :key="item._id">
+      <h3>{{item.title}}</h3>
       <div class="matter">
-        <img src="@/assets/img/22.jpg" alt />
+        <img :src="item.img" alt />
         <div class="include">
           <p>
             <span>zhangongbo</span>
-            <span>发布事件:time</span>
-            <span>分类:技术分享</span>
-            <span>阅读数量()</span>
+            <span>发布时间:{{item.time}}</span>
+            <span>分类:个人学习</span>
+            <span>阅读数量({{item.num}})</span>
           </p>
           <div class="text">
-              23esfs高贵的人格各位特委托热狗但如果的人格特特 特人也而哥特隔热条额士大夫方法方法烦烦烦烦烦烦烦烦烦烦烦烦v
-              23esfs高贵的人格各位特委托热狗但如果的人格特特 特人也而哥特隔热条额士大夫方法方法烦烦烦烦烦烦烦烦烦烦烦烦v
-              23esfs高贵的人格各位特委托热狗但如果的人格特特 特人也而哥特隔热条额士大夫方法方法烦烦烦烦烦烦烦烦烦烦烦烦v
+              {{item.contain}}
               </div>
         </div>
       </div>
     </div>
 
-    <div class="article">
-      <h3>如何建立博客</h3>
-      <div class="matter">
-        <img src="@/assets/img/22.jpg" alt />
-        <div class="include">
-          <p>
-            <span>zhangongbo</span>
-            <span>发布事件:time</span>
-            <span>分类:技术分享</span>
-            <span>阅读数量()</span>
-          </p>
-          <div class="text">
-              23esfs高贵的人格各位特委托热狗但如果的人格特特 特人也而哥特隔热条额士大夫方法方法烦烦烦烦烦烦烦烦烦烦烦烦v
-              23esfs高贵的人格各位特委托热狗但如果的人格特特 特人也而哥特隔热条额士大夫方法方法烦烦烦烦烦烦烦烦烦烦烦烦v
-              23esfs高贵的人格各位特委托热狗但如果的人格特特 特人也而哥特隔热条额士大夫方法方法烦烦烦烦烦烦烦烦烦烦烦烦v
-              </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      arr:[]
+    }
+  },
+  mounted() {
+    this.$axios.post('/article').then(res=>{
+      this.arr=res
+    })
+  },
+};
 </script>
 
 <style lang="scss">
